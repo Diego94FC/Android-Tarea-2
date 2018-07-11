@@ -69,14 +69,11 @@ public class customAdapter  extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            holder = new ViewHolder(); LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            holder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.lv_item, null, true);
             holder.tvname = (TextView) convertView.findViewById(R.id.name);
             holder.iv = (ImageView) convertView.findViewById(R.id.imgView);
-
-
-
             convertView.setTag(holder);
         }else {
             // the getTag returns the viewHolder object set as a tag to the view
@@ -90,6 +87,7 @@ public class customAdapter  extends BaseAdapter {
 
         return convertView;
     }
+
 
     private class ViewHolder {
 

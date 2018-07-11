@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                         Picasso.get().load(parts[3].toString()).into(ivposter);
                         tvid.setText(parts[4]);
 
-                        Toast.makeText(getApplicationContext(), "You have chosen the pen: " + " " + parts[0], Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "You have chosen the pen: " + " " + parts[0], Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -152,54 +152,4 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
 
     }
 
-    public void searchMovie(String palabra){
-
-        lv = (ListView) findViewById(R.id.movieLV);
-        names = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
-
-        String PLACES_URL = "http://www.omdbapi.com/?s="+palabra+"&apikey=82a5f152";
-        String LOG_TAG = "VolleyPlacesRemoteDS";
-
-
-        // Instantiate the RequestQueue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        //Prepare the Request
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, //GET or POST
-                PLACES_URL, //URL
-                null, //Parameters
-                new Response.Listener<JSONObject>() { //Listener OK
-
-                    @Override
-                    public void onResponse(JSONObject responsePlaces) {
-                        try {
-
-                            JSONArray resultados =  responsePlaces.getJSONArray("Search");
-
-                            for (int i=0; i< resultados.length(); i++){
-                                JSONObject xd  =  resultados.getJSONObject(i);
-
-                                String name =   xd.getString("Title");
-                                names.add(name);
-
-                                lv.setAdapter(adapter);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() { //Listener ERROR
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        //Send the request to the requestQueue
-        requestQueue.add(request);
-    }
 }
